@@ -44,16 +44,13 @@ function addProduct(){
     }); 
 }
 
-
 function clearProductList() {
     productListArray.length = 0;
-    productList.innerHTML = '';
-    
+    productList.innerHTML = '';    
 }
-function clearProductField() {
-    
+
+function clearProductField() {    
     productTypeSelectElement.value = '';
     productNameElement.value = '';
     productCountElement.value = '';
 }
-
