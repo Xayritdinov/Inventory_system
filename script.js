@@ -1,20 +1,18 @@
-
 const productTypeSelectElement = document.getElementById('type-select');
 const productNameElement = document.getElementById('product-name');
 const productCountElement = document.getElementById('product-count');
 const addProductButton = document.querySelector(".add-product");
 const clearProductListButton = document.querySelector(".clear-list");
 const clearProductFieldButton = document.querySelector(".clear-field");
-const productList = document.querySelector(".products-list")
+const productList = document.querySelector(".products-list");
 
-const productListArray =[]
+const productListArray = [];
 
 addProductButton.addEventListener("click", addProduct);
 clearProductListButton.addEventListener("click", clearProductList);
 clearProductFieldButton.addEventListener("click", clearProductField);
 
-
-function addProduct(){
+function addProduct() {
     const productType = productTypeSelectElement.value;
     const productName = productNameElement.value;
     const productCount = productCountElement.value;
@@ -35,18 +33,35 @@ function addProduct(){
     };
 
     productListArray.push(product);
-    productList.innerHTML = '';
+    clearProductListArray();
+}
 
-    productListArray.forEach((prod) => {
+function clearProductListArray() {
+    productList.innerHTML = '';
+    productListArray.forEach((prod, index) => {
         const productItem = document.createElement('li');
-        productItem.innerHTML = `Тип продукта: <b>${prod.type}</b>, Название: <b>${prod.name}</b>, Количество: <b>${prod.count}</b>`;
+        productItem.innerHTML = `Тип продукта: <b>${prod.type}</b>, Название: <b>${prod.name}</b>, Количество: <b>${prod.count}</b>   `;
+        
+        const trashButton = document.createElement('button');
+        const trashIcon = document.createElement('img');
+        trashIcon.src = './trashIcon.png';
+        trashIcon.alt = 'Удалить';
+        trashIcon.style.width = '20px';    
+        trashButton.appendChild(trashIcon);
+
+        trashButton.onclick = function() {
+            productListArray.splice(index, 1);
+            clearProductListArray();
+        };
+
+        productItem.appendChild(trashButton);
         productList.appendChild(productItem);
-    }); 
+    });
 }
 
 function clearProductList() {
     productListArray.length = 0;
-    productList.innerHTML = '';    
+    productList.innerHTML = '';
 }
 
 function clearProductField() {    

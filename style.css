@@ -201,3 +201,8 @@ select:is(:hover, :focus) {
   align-items: center;
 }
 
+.products-wrapper button {
+  all: unset;
+  display: inline-block;
+  cursor: pointer;  
+}
